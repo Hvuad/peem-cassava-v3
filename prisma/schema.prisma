@@ -1,0 +1,87 @@
+generator client {
+  provider = "prisma-client"
+  output   = "../generated/prisma"
+}
+
+datasource db {
+  provider = "mysql"
+}
+
+model accountant {
+  id          String   @id
+  name        String
+  buying      Float?   @default(0)
+  selling     Float?   @default(0)
+  description String?  @db.Text
+  branch      String
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime
+}
+
+model bank {
+  id           String   @id
+  one          Float?   @default(0)
+  two          Float?   @default(0)
+  five         Float?   @default(0)
+  ten          Float?   @default(0)
+  twenty       Float?   @default(0)
+  fifty        Float?   @default(0)
+  one_hundred  Float?   @default(0)
+  five_hundred Float?   @default(0)
+  one_thousand Float?   @default(0)
+  branch       String
+  createdAt    DateTime @default(now())
+  updatedAt    DateTime
+}
+
+model bank_laos {
+  id                   String   @id
+  One_hundred_thousand Float    @default(0)
+  Fifty_thousand       Float    @default(0)
+  Twenty_thousand      Float    @default(0)
+  Ten_thousand         Float    @default(0)
+  Five_thousand        Float    @default(0)
+  Two_thousand         Float    @default(0)
+  One_thousand         Float    @default(0)
+  Five_hundred         Float    @default(0)
+  branch               String
+  createdAt            DateTime @default(now())
+  updatedAt            DateTime
+}
+
+model buying {
+  id            String   @id
+  name          String
+  weight        Float
+  pay           Float
+  extra         Float?   @default(0)
+  per_kg        Float?   @default(0)
+  branch        String
+  createdAt     DateTime @default(now())
+  updatedAt     DateTime
+  is_paid       Boolean  @default(true)
+  percent       Float?   @default(0)
+  is_extra_paid Boolean  @default(true)
+}
+
+model selling {
+  id         String   @id
+  name       String
+  vehicle_no String
+  weight     Float
+  pay        Float
+  per_kg     Float?   @default(0)
+  pay_type   String   @default("cash")
+  branch     String
+  createdAt  DateTime @default(now())
+  updatedAt  DateTime
+}
+
+model user {
+  id        String   @id
+  createdAt DateTime @default(now())
+  updatedAt DateTime
+  password  String
+  username  String   @unique
+  country   String   @default("thai")
+}
