@@ -1,7 +1,7 @@
 import { hc } from "hono/client"
 import type { AppType } from "../../../server"
 import { toast } from "react-toastify"
-
+export type { InferResponseType } from "hono/client"
 const throwingFetcher = async (
 	input: RequestInfo | URL,
 	init?: RequestInit,
