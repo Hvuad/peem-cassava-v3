@@ -1,6 +1,7 @@
 import { Hono } from "hono"
 import { db } from "./db"
 import { middlewareAuth } from "./middleware"
+import { Errors } from "./errors"
 
 export type AppEnv = {
 	Variables: {
@@ -11,6 +12,7 @@ export type AppEnv = {
 		) => Promise<Awaited<ReturnType<typeof db.user.findMany>>>
 		user: Awaited<ReturnType<typeof db.user.findMany>>[number]
 		branch: string
+		errors: typeof Errors
 	}
 }
 export class hono extends Hono<AppEnv> {
@@ -32,6 +34,8 @@ export class hono extends Hono<AppEnv> {
 				const users = await db.user.findMany()
 				c.set("users", users)
 			}
+
+			c.set("errors", Errors)
 
 			await next()
 		})

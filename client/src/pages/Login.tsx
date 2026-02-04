@@ -25,14 +25,14 @@ export const Login = () => {
 
 	const loginMutation = useMutation({
 		mutationFn: async (data: LoginFormData) => {
-			const res = await api.api.v1.user.login.$post({
+			const res = await api.api.v1.auth.login.$post({
 				json: data,
 			})
 			return res.json()
 		},
 		onSuccess: (data) => {
-			useUserStore.setState({ user: data.data })
-			toast.success(data.message)
+			useUserStore.setState({ user: data })
+			toast.success("Logged in successfully")
 		}
 	})
 

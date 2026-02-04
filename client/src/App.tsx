@@ -1,10 +1,16 @@
 import { useUserStore } from "./stores/user.store"
 import { Login } from "./pages/Login"
+import { NavbarCustom } from "./components/Navbar"
 
 export default function App() {
 	const userStore = useUserStore()
 	if (!userStore.user) {
 		return <Login />
 	}
-	return <div>{JSON.stringify(userStore.user, null, 4)}</div>
+	return (
+		<>
+			<NavbarCustom />
+			<div>xxx</div>
+		</>
+	)
 }

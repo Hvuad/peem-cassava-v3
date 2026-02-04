@@ -1,6 +1,7 @@
 import { hc } from "hono/client"
 import type { AppType } from "../../../server"
 import { toast } from "react-toastify"
+import { useUserStore } from "../stores/user.store"
 export type { InferResponseType } from "hono/client"
 const throwingFetcher = async (
 	input: RequestInfo | URL,
@@ -11,7 +12,10 @@ const throwingFetcher = async (
 	if (!response.ok) {
 		// response.ok is true for 200-299 status codes
 		const errorBody = await response.text() // or response.json() if you return JSON errors
-		if (response.status === 400) {
+		if (response.status === 401) {
+			toast.warn(errorBody)
+			useUserStore.setState({ user: undefined })
+		} else if (response.status === 400) {
 			toast.warn(errorBody)
 		} else {
 			toast.error(errorBody)

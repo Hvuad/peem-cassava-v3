@@ -3,7 +3,7 @@ import { devtools, persist } from "zustand/middleware"
 import type { api, InferResponseType } from "../lib/api"
 
 interface State {
-	user?: InferResponseType<typeof api.api.v1.user.me.$get>
+	user?: InferResponseType<typeof api.api.v1.auth.me.$get>
 }
 interface Action {
 	setUser: (user: State["user"]) => void

@@ -10,7 +10,7 @@ export const authRoute = new hono()
 		const user = c.get("user")
 
 		if (!user) {
-			return c.text("Unauthorized", 401)
+			throw new c.var.errors.Unauthorized("Unauthorized")
 		}
 
 		return c.json(user)
@@ -21,14 +21,14 @@ export const authRoute = new hono()
 		const user = await c.var.db.user.findUnique({ where: { username } })
 
 		if (!user) {
-			return c.text("Invalid username", 400)
+			throw new c.var.errors.ErrorData("Invalid username")
 		}
 
 		if (user.password !== password) {
-			return c.text("Invalid password", 400)
+			throw new c.var.errors.ErrorData("Invalid password")
 		}
 
 		c.set("user", user)
 
-		return c.json({ message: "Login successful", data: user })
+		return c.json(user)
 	})
