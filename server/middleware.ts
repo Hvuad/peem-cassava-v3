@@ -15,6 +15,7 @@ export const middlewareAuth = createMiddleware<AppEnv>(async (c, next) => {
 	}
 
 	c.set("user", foundUser)
+	c.set("branch", foundUser.username)
 
 	await next()
 })

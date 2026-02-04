@@ -10,6 +10,7 @@ export type AppEnv = {
 			x?: Awaited<ReturnType<typeof db.user.findMany>>,
 		) => Promise<Awaited<ReturnType<typeof db.user.findMany>>>
 		user: Awaited<ReturnType<typeof db.user.findMany>>[number]
+		branch: string
 	}
 }
 export class hono extends Hono<AppEnv> {
